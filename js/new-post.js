@@ -24,7 +24,7 @@ const submitNewPost = () => {
     }).then(()=>{
         setTimeout(()=>{
         window.location.href="index.html";
-        },1000);
+        },800);
     })
 
 }

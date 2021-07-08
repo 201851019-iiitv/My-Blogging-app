@@ -2,8 +2,10 @@ const express=require('express');
 const app = express();
 const multer=require('multer');
 const Post= require('./api/models/post')
+const dotenv=require('dotenv');
+dotenv.config();
+const port=process.env.PORT ||3000;
 const postdata=new Post();
-
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, './uploads')
@@ -59,7 +61,7 @@ app.post('/api/posts',upload.single('post-image'),(req,res)=>{
         "title":req.body.title,
         "content":req.body.content,
         "post_image": req.file.path,
-        "added_date":Date.now()
+        "added_date":Date.now().toString()
     }
    
     res.send(postdata.addnewpost(newPost));
@@ -67,7 +69,7 @@ app.post('/api/posts',upload.single('post-image'),(req,res)=>{
 
 })
 
-app.listen('3000',()=>{
+app.listen(port,()=>{
     console.log('listening on');
    
 })
